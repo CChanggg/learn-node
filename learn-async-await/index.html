@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sync await 异步函数</title>
+</head>
+
+<body>
+    <script>
+        // 异步函数 koa的基础 es7核心技术点 解决promise .then 的不优雅
+        //声明异步函数 
+        var sleep = function(time) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // reject('error');
+                        resolve();
+                    }, time)
+                })
+            }
+            //把要异步完成的封装在一个函数里
+        var start = async function() {
+            //     try {
+            //         console.log('start');
+            //         let sleep_time = await sleep(3000);
+            //         console.log('end')
+            //     } catch (e) {
+            //         console.log(e)
+            //     }
+            // }
+            for (var i = 1; i <= 10; i++) {
+                console.log(`当前是第${i}次等待。`);
+                await sleep(3000);
+            }
+        }
+        start();
+    </script>
+</body>
+
+</html>

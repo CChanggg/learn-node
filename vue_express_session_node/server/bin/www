@@ -1,0 +1,8 @@
+var app = require('../app')
+var http = require('http')
+var server = http.createServer(app)
+server.listen(3000)
+server.on('listening',onListening)
+function onListening (){
+    console.log('服务器在3000端口启动了')
+}

@@ -1,0 +1,49 @@
+<% include header%>
+    <div class="container">
+        <form class="form creat">
+            <div>
+                <label>用户名:</label>
+                <input type="text" name="name" placeholder="用户名">
+            </div>
+            <div>
+                <label>密码:</label>
+                <input type="password" name="password" placeholder="密码">
+            </div>
+            <div>
+                <label>重复密码:</label>
+                <input type="password" name="repeatpass" class="repeatpass">
+            </div>
+            <div class="submit">注册</div>
+        </form>
+    </div>
+    <script>
+        // ajax 提交表单 前端的方式 
+        $('.submit').click(() => {
+            // 用的最多的是$.getJSON
+            // 没有做表单校验,重后端
+            // 表单校验应该在前端后端都做
+            $.ajax({
+                url: '/signup',
+                type: 'POST',
+                dataType: 'json',
+                data: $('.form').serialize(),//序列化 反序列化(字符串变对象)
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg.data === 3) {
+                        $('.success').text('注册成功')
+                        setTimeout(() => {
+                            window.location.href="/signin"
+                        },1000)
+                    } else if (msg.data === 2) {
+                        alert('密码与重复密码不一致');
+                    } else if (msg.data === 1) {
+                        alert('用户名已存在!');
+                    }
+                },    
+                error: function () {
+                    alert('异常');
+                }
+            })
+        })
+    </script>
+<% include footer%>
